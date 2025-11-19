@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AppointmentSystemLayout.cshtml";
+}
+
+<body>
+    <!--header-->
+    <!-- //header -->
+    <!--banner-slider-->
+    <!-- main-slider -->
+    @await Component.InvokeAsync("_AppointmentSystemSliderComponentPartial")
+    <!-- /main-slider -->
+    <!-- //banner-slider-->
+    <!--/grids-->
+    @await Component.InvokeAsync("_AppointmentSystemCompanyListComponentPartial")
+    <!--//grids-->
+    <!-- stats -->
+    @await Component.InvokeAsync("_AppointmentSystemStaticsComponentPartial")
+    <!-- //stats -->
+    <!--/-->
+    @await Component.InvokeAsync("_AppointmentSystemFeatureComponentPartial")
+    <!-- //stats -->
+    <!--/w3l-bottom-->
+    @await Component.InvokeAsync("_AppointmentSystemSubAboutComponentPartial")
+    <!--//w3l-bottom-->
+    <!-- testimonials -->
+    @await Component.InvokeAsync("_AppointmentSystemTestimonialComponentPartial")
+    <!-- //testimonials -->
+    <!--/w3l-footer-29-main-->
+
+
+
+</body>
+
+</html>

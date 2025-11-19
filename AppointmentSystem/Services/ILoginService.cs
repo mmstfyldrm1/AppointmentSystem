@@ -1,0 +1,7 @@
+﻿namespace AppointmentSystem.Services
+{
+    public interface ILoginService
+    {
+        public string GetUserId { get; }
+    }
+}

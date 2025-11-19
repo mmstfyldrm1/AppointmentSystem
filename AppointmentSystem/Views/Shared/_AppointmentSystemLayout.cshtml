@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="zxx">
+
+@await Html.PartialAsync("~/Views/AppointmnetSystemLayoutPartial/_HeadLayoutPartial.cshtml")
+
+<body>
+    <!--header-->
+  
+    @await Html.PartialAsync("~/Views/AppointmnetSystemLayoutPartial/_NavbarLayoutPartial.cshtml")
+    
+    @RenderBody()
+    @await Html.PartialAsync("~/Views/AppointmnetSystemLayoutPartial/_FooterLayoutPartial.cshtml")
+
+    @await Html.PartialAsync("~/Views/AppointmnetSystemLayoutPartial/_ScriptLayoutPartial.cshtml")
+
+
+</body>
+
+</html>
+
+

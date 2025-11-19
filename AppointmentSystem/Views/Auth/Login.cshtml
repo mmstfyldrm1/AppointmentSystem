@@ -1,0 +1,32 @@
+﻿@model LoginDtos
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AppointmentSystemLayout.cshtml";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100 bg-white">
+    <div class="card shadow-sm border-0 rounded-4" style="max-width: 420px; width: 100%;">
+        <div class="card-body p-4">
+            <h3 class="text-center mb-3">Giriş Yap</h3>
+            <form asp-action="Login" method="post">
+              
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="form-label">E-posta</label>
+                    <input asp-for="Email" class="form-control form-control-sm" placeholder="E-posta adresinizi girin" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Password" class="form-label">Şifre</label>
+                    <input asp-for="Password" class="form-control form-control-sm" type="password" placeholder="Şifrenizi girin" />
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+
+                <button type="submit"  class="btn btn-primary w-100 rounded-pill py-2">Giriş Yap</button>
+            </form>
+            <div class="text-center mt-3">
+                <small>Yeni hesap oluştur ? <a href="/auth/register" class="text-decoration-none">Giriş Yap</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentSystem", "AppointmentSystem\AppointmentSystem.csproj", "{B9353800-9B6A-4ED4-8DF6-08171730A5EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{4E739789-D3A1-4BF8-91CD-BBD1D3ED997C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityLayer", "EntityLayer\EntityLayer.csproj", "{7C775000-D2F7-4669-BE90-ACBDC833E30F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccsessLayer", "DataAccsessLayer\DataAccsessLayer.csproj", "{7CD6B717-A10F-4171-A401-BBCD37D49D41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentSystemAPI", "AppointmentSystemAPI\AppointmentSystemAPI.csproj", "{6182F377-2CD9-45F0-83C8-FF7CCC39435A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOLayer", "DTOLayer\DTOLayer.csproj", "{9C875022-2FD1-404E-B927-8358F762CAF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9353800-9B6A-4ED4-8DF6-08171730A5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9353800-9B6A-4ED4-8DF6-08171730A5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9353800-9B6A-4ED4-8DF6-08171730A5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9353800-9B6A-4ED4-8DF6-08171730A5EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E739789-D3A1-4BF8-91CD-BBD1D3ED997C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E739789-D3A1-4BF8-91CD-BBD1D3ED997C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E739789-D3A1-4BF8-91CD-BBD1D3ED997C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E739789-D3A1-4BF8-91CD-BBD1D3ED997C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C775000-D2F7-4669-BE90-ACBDC833E30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C775000-D2F7-4669-BE90-ACBDC833E30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C775000-D2F7-4669-BE90-ACBDC833E30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C775000-D2F7-4669-BE90-ACBDC833E30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD6B717-A10F-4171-A401-BBCD37D49D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD6B717-A10F-4171-A401-BBCD37D49D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD6B717-A10F-4171-A401-BBCD37D49D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD6B717-A10F-4171-A401-BBCD37D49D41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6182F377-2CD9-45F0-83C8-FF7CCC39435A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6182F377-2CD9-45F0-83C8-FF7CCC39435A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6182F377-2CD9-45F0-83C8-FF7CCC39435A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6182F377-2CD9-45F0-83C8-FF7CCC39435A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C875022-2FD1-404E-B927-8358F762CAF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C875022-2FD1-404E-B927-8358F762CAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C875022-2FD1-404E-B927-8358F762CAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C875022-2FD1-404E-B927-8358F762CAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2573AB30-0A5E-4E97-8205-8F03E464F508}
+	EndGlobalSection
+EndGlobal

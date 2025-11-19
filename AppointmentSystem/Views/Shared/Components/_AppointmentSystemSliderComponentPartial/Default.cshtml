@@ -1,0 +1,124 @@
+﻿@model AppointmentSearchDto
+<section class="w3l-main-slider" id="home">
+    <div class="banner-content">
+        <div id="demo-1"
+             data-zs-src='["assets/images/banner1.jpg", "assets/images/banner2.jpg","assets/images/banner3.jpg", "assets/images/banner4.jpg"]'
+             data-zs-overlay="dots">
+            <div class="demo-inner-content">
+                <div class="container">
+                    <div class="banner-infhny">
+                        <h3>You don't need to go far to find what matters.</h3>
+                        <h6 class="mb-3">Discover your next adventure</h6>
+                        <div class="flex-wrap search-wthree-field mt-md-5 mt-4">
+                            <form asp-controller="AppointmentSystem" asp-action="PartialSearch" method="post" class="row gy-3">
+
+                                <div class="col-md-4">
+                                    <input type="search" asp-for="MostPopular" class="form-control" placeholder="Anahtar Kelime" required />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input asp-for="Date" type="date" class="form-control" required />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select asp-for="City" class="form-select" aria-label="Default select example" required>
+                                        <option value="">Şehir Seçiniz</option>
+                                        <option>Adana</option>
+                                        <option>Adıyaman</option>
+                                        <option>Ağrı</option>
+                                        <option>Aksaray</option>
+                                        <option>Amasya</option>
+                                        <option>Ankara</option>
+                                        <option>Antalya</option>
+                                        <option>Ardahan</option>
+                                        <option>Artvin</option>
+                                        <option>Aydın</option>
+                                        <option>Balıkesir</option>
+                                        <option>Bartın</option>
+                                        <option>Batman</option>
+                                        <option>Bayburt</option>
+                                        <option>Bilecik</option>
+                                        <option>Bingöl</option>
+                                        <option>Bitlis</option>
+                                        <option>Bolu</option>
+                                        <option>Burdur</option>
+                                        <option>Bursa</option>
+                                        <option>Çanakkale</option>
+                                        <option>Çankırı</option>
+                                        <option>Çorum</option>
+                                        <option>Denizli</option>
+                                        <option>Diyarbakır</option>
+                                        <option>Düzce</option>
+                                        <option>Edirne</option>
+                                        <option>Elazığ</option>
+                                        <option>Erzincan</option>
+                                        <option>Erzurum</option>
+                                        <option>Eskişehir</option>
+                                        <option>Gaziantep</option>
+                                        <option>Giresun</option>
+                                        <option>Gümüşhane</option>
+                                        <option>Hakkâri</option>
+                                        <option>Hatay</option>
+                                        <option>Iğdır</option>
+                                        <option>Isparta</option>
+                                        <option>İstanbul</option>
+                                        <option>İzmir</option>
+                                        <option>Kahramanmaraş</option>
+                                        <option>Karabük</option>
+                                        <option>Karaman</option>
+                                        <option>Kars</option>
+                                        <option>Kastamonu</option>
+                                        <option>Kayseri</option>
+                                        <option>Kilis</option>
+                                        <option>Kırıkkale</option>
+                                        <option>Kırklareli</option>
+                                        <option>Kırşehir</option>
+                                        <option>Kocaeli</option>
+                                        <option>Konya</option>
+                                        <option>Kütahya</option>
+                                        <option>Malatya</option>
+                                        <option>Manisa</option>
+                                        <option>Mardin</option>
+                                        <option>Mersin</option>
+                                        <option>Muğla</option>
+                                        <option>Muş</option>
+                                        <option>Nevşehir</option>
+                                        <option>Niğde</option>
+                                        <option>Ordu</option>
+                                        <option>Osmaniye</option>
+                                        <option>Rize</option>
+                                        <option>Sakarya</option>
+                                        <option>Samsun</option>
+                                        <option>Şanlıurfa</option>
+                                        <option>Siirt</option>
+                                        <option>Sinop</option>
+                                        <option>Sivas</option>
+                                        <option>Şırnak</option>
+                                        <option>Tekirdağ</option>
+                                        <option>Tokat</option>
+                                        <option>Trabzon</option>
+                                        <option>Tunceli</option>
+                                        <option>Uşak</option>
+                                        <option>Van</option>
+                                        <option>Yalova</option>
+                                        <option>Yozgat</option>
+                                        <option>Zonguldak</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 mt-2">
+                                    <button type="submit" class="btn btn-primary w-50">
+                                        Ara
+                                    </button>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,77 @@
+﻿@using EntityLayer.Concrete
+@using Microsoft.AspNetCore.Identity
+@model CreateAppointmentDto
+
+@{
+    ViewData["Title"] = "AddAppointment";
+    Layout = "~/Views/Shared/_AppointmentSystemLayout.cshtml";
+  
+
+}
+
+<section class="w3l-contact py-5" id="contact">
+    <div class="container py-lg-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold mb-2">Yeni Randevu Oluştur</h2>
+                    <p class="text-muted">Aşağıdaki formu doldurarak hızlıca randevu talebinde bulunabilirsiniz.</p>
+                    <hr class="mx-auto" style="width:80px; border:2px solid #0d6efd; border-radius:5px;">
+                </div>
+
+                <form method="post" class="p-4 shadow-lg rounded-4 bg-white border">
+
+                    <div class="row g-4">
+
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Randevu Tarihi</label>
+                            <input type="date" asp-for="AppointmentDate" class="form-control form-control-lg rounded-3" required />
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Ad Soyad</label>
+                            <input type="text" asp-for="UserName"
+                                   class="form-control form-control-lg rounded-3"
+                                   placeholder="Adınızı yazınız" required />
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Telefon</label>
+                            <input type="text" asp-for="UserPhone"
+                                   class="form-control form-control-lg rounded-3"
+                                   placeholder="Telefon numaranız" required />
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Açıklama</label>
+                            <textarea asp-for="Explanation"
+                                      class="form-control form-control-lg rounded-3"
+                                      rows="4"
+                                      placeholder="Mesajınızı yazınız..."
+                                      required>
+                            </textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary btn-lg px-5 py-2 rounded-3 shadow-sm">
+                            Randevu Oluştur
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+   
+
+
+
+
+
