@@ -49,7 +49,7 @@ namespace AppointmentSystem.Controllers
 
             var client = _apiClientService.CreateClient();
 
-            int userId = 0;
+            int userId = 0 ;
             int.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out userId);
             createAppointmentDtos.ApplicationUserId= userId;    
             var  appointment = _mapper.Map<CreateAppointmentDto>(createAppointmentDtos);
