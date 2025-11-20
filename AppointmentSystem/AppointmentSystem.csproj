@@ -29,4 +29,10 @@
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\Components\_AppointmentSystemAdminHeadComponentPartial\" />
+  </ItemGroup>
+
 </Project>
