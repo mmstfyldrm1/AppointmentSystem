@@ -5,6 +5,7 @@ using DataAccsessLayer.Concrete.Repository;
 using DataAccsessLayer.Concrete.UoW;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,10 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     serverOptions.Limits.MaxRequestHeadersTotalSize = 1024 * 1024; // 1MB
 });
 
+
+
+
+
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
@@ -43,6 +48,7 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(StartupBase));
 builder.Services.AddHttpClient();
+//builder.Services.AddScoped<AssignToUserRoleService>();  
 
 var app = builder.Build();
 
@@ -58,14 +64,14 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{Id?}");
 
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
       name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{Id?}"
     );
 });
 

@@ -46,16 +46,16 @@ namespace AppointmentSystem.Controllers
         }
         /*
         [HttpGet]
-        public async Task<IActionResult> PropertySingle(int id)
+        public async Task<IActionResult> PropertySingle(int Id)
         {
-            ViewBag.i = id;
+            ViewBag.i = Id;
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44387/api/Products/GetProductByProductId?id=" + id);
+            var responseMessage = await client.GetAsync("https://localhost:44387/api/Products/GetProductByProductId?Id=" + Id);
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<ResultProductDto>(jsonData);
 
             var client2 = _httpClientFactory.CreateClient();
-            var responseMessage2 = await client2.GetAsync("https://localhost:44387/api/Products/GetProductDetailByProductDetailId?id=" + id);
+            var responseMessage2 = await client2.GetAsync("https://localhost:44387/api/Products/GetProductDetailByProductDetailId?Id=" + Id);
             var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
             var values2 = JsonConvert.DeserializeObject<GetProductDetailByProductDetailIdDto>(jsonData2);
             int difDate = DateTime.Now.Month - values2.AdvertisementDate.Month;

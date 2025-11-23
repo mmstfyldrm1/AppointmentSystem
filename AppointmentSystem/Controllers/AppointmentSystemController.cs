@@ -145,6 +145,47 @@ namespace AppointmentSystem.Controllers
 
         }
 
+        public async Task<IActionResult> MyActiveAppointment()
+        {
+            var client = _apiClientService.CreateClient();
+            int userId = 0;
+            int.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out userId);
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"select      ");
+            sb.AppendLine($"Isnull(ts.Slot,'') AS [Time],");
+            sb.AppendLine($"Isnull(w.Name,'') AS [WorkerName],");
+            sb.AppendLine($"ISNULL(w.WorkerImg, '') AS [WorkerImg],");
+            sb.AppendLine($"ISNULL(s.Name,'') AS [ShopName],");
+            sb.AppendLine($"ISNULL(w.WorkerPhone,'') AS [WorkerPhone],");
+            sb.AppendLine($"ISNULL(s.ShopPhone,'') AS [ShopPhone]");
+            sb.AppendLine($"from Dt_Appointments ap");
+            sb.AppendLine($"left join Dt_Shops s with(nolock) on s.Id =ap.ShopId");
+            sb.AppendLine($"left join Dt_Workers w with(nolock) on w.Id = ap.WorkerId");
+            sb.AppendLine($"left join Dt_TimeSlots ts with(nolock) on ts.Id=ap.TimeSlotId");
+            sb.AppendLine($"where AppointmentStatus = 1 and ApplicationUserId="+ userId.ToString());
+            var queryObj = new
+            {
+                query = sb.ToString()
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(queryObj), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:7179/api/Query/execute", content);
+            if (!response.IsSuccessStatusCode)
+                return RedirectToAction("Index", "AppointmentSystem");
+
+
+            var jsonData = await response.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<MyActiveAppointmentDto>>(jsonData);
+            //TempData["searchResult"] = JsonConvert.SerializeObject(values);
+            HttpContext.Session.SetString("searchResult", JsonConvert.SerializeObject(values));
+
+            return View(values);
+
+        }
+
+
+
     }
 }
 

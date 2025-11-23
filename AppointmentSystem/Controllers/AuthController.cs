@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using AppointmentSystem.Services;
+using EntityLayer.Concrete;
 
 
 namespace AppointmentSystem.Controllers
@@ -14,10 +16,13 @@ namespace AppointmentSystem.Controllers
     public class AuthController : Controller
     {
         private readonly HttpClient _httpClient;
+        
 
-        public AuthController(IHttpClientFactory httpClientFactory)
+       
+
+        public AuthController(HttpClient httpClient)
         {
-            _httpClient = httpClientFactory.CreateClient("ApiClient");
+            _httpClient = httpClient;
         }
 
         [HttpGet]
@@ -26,16 +31,30 @@ namespace AppointmentSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDtos dto)
         {
+            if (dto.ShopOwners == true)
+            {
+                dto.Role = "SHOPOWNERS";
+            }
+            if (dto.Worker == true)
+            {
+                dto.Role = "WORKER";
+            }
+            if (dto.Worker ==false && dto.ShopOwners==false)
+            {
+                dto.Role = "MEMBER";
+            }
             var response = await _httpClient.PostAsJsonAsync("https://localhost:7179/api/Auth/register", dto);
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Kayıt başarılı! Giriş yapabilirsiniz.";
+               
                 return RedirectToAction("Login");
             }
 
             ViewBag.Error = "Kayıt başarısız!";
             return View(dto);
         }
+
 
         [HttpGet]
         public IActionResult Login() => View();

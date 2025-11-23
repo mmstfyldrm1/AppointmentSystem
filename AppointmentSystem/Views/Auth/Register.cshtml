@@ -27,6 +27,23 @@
                     <input asp-for="Password" class="form-control form-control-sm" type="password" placeholder="Şifrenizi girin" />
                     <span asp-validation-for="Password" class="text-danger small"></span>
                 </div>
+                <div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="ShopOwners" type="checkbox" />
+                        <label class="form-check-label" asp-for="ShopOwners">
+                            İşletme Sahibiyim
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" asp-for="Worker" type="checkbox" />
+                        <label class="form-check-label" asp-for="Worker">
+                            Berberim
+                        </label>
+                    </div>
+                    
+                </div>
 
                 <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Kayıt Ol</button>
             </form>

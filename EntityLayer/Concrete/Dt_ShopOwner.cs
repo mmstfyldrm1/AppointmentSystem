@@ -14,6 +14,8 @@ namespace EntityLayer.Concrete
 
         public string? ShopOwnerImg { get; set; }
 
+        public string? ShopOwnerPhone { get; set; }
+
         // Bir işletmenin bir sahibi olur
         [JsonIgnore]
         public  Dt_ApplicationUser? ApplicationUser { get; set; } // Navigation property

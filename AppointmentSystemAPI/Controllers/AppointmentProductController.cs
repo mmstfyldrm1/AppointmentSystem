@@ -19,7 +19,7 @@ namespace AppointmentSystemAPI.Controllers
             return Ok(user);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var user = await _appointmentProductService.GetById(id);
@@ -45,7 +45,7 @@ namespace AppointmentSystemAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _appointmentProductService.GetById(id);

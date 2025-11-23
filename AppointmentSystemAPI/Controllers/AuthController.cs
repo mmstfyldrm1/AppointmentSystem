@@ -1,5 +1,6 @@
 ﻿
 using AppointmentSystemAPI.Dtos.AuthUserDtos;
+using AppointmentSystemAPI.Dtos.RolesDtos;
 using AppointmentSystemAPI.Services;
 using DataAccsessLayer.Concrete.UoW;
 using EntityLayer.Concrete;
@@ -17,12 +18,14 @@ namespace AppointmentSystemAPI.Controllers
         private readonly SignInManager<Dt_ApplicationUser> _signInManager;
         private readonly GenerateTokenService _generateTokenService;
 
-        public AuthController(UserManager<Dt_ApplicationUser> userManager, SignInManager<Dt_ApplicationUser> signInManager, GenerateTokenService generateTokenService)
+        public AuthController(UserManager<Dt_ApplicationUser> userManager, SignInManager<Dt_ApplicationUser> signInManager,  GenerateTokenService generateTokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _generateTokenService = generateTokenService;
         }
+
+        
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDtos dto)
@@ -32,9 +35,18 @@ namespace AppointmentSystemAPI.Controllers
                 UserName = dto.Email,
                 Email = dto.Email,
                 FullName = dto.FullName
+
             };
 
             var result = await _userManager.CreateAsync(user, dto.Password);
+            if (result.Succeeded)
+            {
+                var role = await _userManager.AddToRoleAsync(user, dto.Role);
+                if (role.Succeeded)
+                {
+                    return Ok("ok");    
+                }
+            }
 
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
