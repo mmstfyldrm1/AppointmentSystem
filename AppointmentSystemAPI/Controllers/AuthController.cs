@@ -34,7 +34,8 @@ namespace AppointmentSystemAPI.Controllers
             {
                 UserName = dto.Email,
                 Email = dto.Email,
-                FullName = dto.FullName
+                FullName = dto.FullName,
+                Role=dto.Role,
 
             };
 

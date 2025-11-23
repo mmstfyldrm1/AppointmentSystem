@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DTOLayer.AppointmentDtos;
+using DTOLayer.ShopOwnersDtos.AddShopOwnerDtos;
 using EntityLayer.Concrete;
 
 namespace AppointmentSystem.Mapping.AutoMapperProfile
@@ -11,6 +12,9 @@ namespace AppointmentSystem.Mapping.AutoMapperProfile
 			CreateMap<Dt_Appointment, CreateAppointmentDto>();
 			CreateMap<CreateAppointmentDto, Dt_Appointment>();
 
-		}
+            CreateMap<Dt_ShopOwner, AddShopOwnersDto>();
+            CreateMap<AddShopOwnersDto, Dt_ShopOwner>();
+
+        }
 	}
 }

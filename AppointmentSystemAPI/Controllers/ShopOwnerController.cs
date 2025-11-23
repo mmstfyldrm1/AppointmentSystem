@@ -37,8 +37,12 @@ namespace AppointmentSystemAPI.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] Dt_ShopOwner owner)
         {
-            _shopOwnerService.Add(owner);
-            return Ok("Ok");
+            var response =  _shopOwnerService.Add(owner);
+            if (response.IsCompletedSuccessfully)
+            {
+                return Ok("Ok");
+            }
+            return Ok(response);
         }
 
         [HttpPut]

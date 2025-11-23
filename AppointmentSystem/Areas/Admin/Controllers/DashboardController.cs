@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AppointmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminController : Controller
+    [Authorize]
+    public class DashboardController : Controller
     {
         public IActionResult Index()
         {

@@ -11,7 +11,7 @@ namespace DTOLayer.ShopOwnersDtos.AddShopOwnerDtos
     public class AddShopOwnersDto
     {
        
-        public string ShopOwnerName { get; set; }
+        public string Name { get; set; }
 
         public string? ShopOwnerImg { get; set; }
 

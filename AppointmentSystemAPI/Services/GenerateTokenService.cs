@@ -17,12 +17,23 @@ namespace AppointmentSystemAPI.Services
 
         public string CreateToken(Dt_ApplicationUser user)
         {
-            // 🔹 Token’a eklenecek claimler
+            // 🔹 Token'a eklenecek claimler
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.FullName ?? user.UserName ?? user.Email)
             };
+
+            // 🔹 Kullanıcının rolünü token'a ekle
+            if (!string.IsNullOrEmpty(user.Role))
+            {
+                claims.Add(new Claim(ClaimTypes.Role, user.Role));
+            }
+            else
+            {
+                // Varsayılan rol veya kullanıcı tipine göre rol ata
+                claims.Add(new Claim(ClaimTypes.Role, "MEMBER")); // Varsayılan
+            }
 
             // 🔹 Key & Credentials
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

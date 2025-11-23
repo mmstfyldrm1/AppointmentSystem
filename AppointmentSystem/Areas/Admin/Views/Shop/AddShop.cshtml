@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "AddShop";
+    Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
+}
+@model AddShopDto
+
+<<div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">İşletme Sahibi Bilgileri</h6>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">İşletme İsmi</label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <div class="form-text">
+                We'll never share your phone with anyone else.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ShopPhone" class="form-label">Telefon</label>
+            <input type="text" asp-for="ShopPhone" class="form-control" />
+            <div class="form-text">
+                We'll never share your phone with anyone else.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ShopAddress" class="form-label">İl</label>
+            <input type="text" asp-for="ShopAddress" class="form-control" />
+            <div class="form-text">
+                We'll never share your phone with anyone else.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image" class="form-label">Resim Seçiniz</label>
+            <input class="form-control form-control-lg" asp-for="Image" type="file" />
+        </div>
+        <hr />
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </form>
+</div>
+

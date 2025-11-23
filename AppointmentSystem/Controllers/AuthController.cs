@@ -47,7 +47,6 @@ namespace AppointmentSystem.Controllers
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Kayıt başarılı! Giriş yapabilirsiniz.";
-               
                 return RedirectToAction("Login");
             }
 
@@ -80,11 +79,22 @@ namespace AppointmentSystem.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()), 
                 new Claim(ClaimTypes.Name, result.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, result.Email)
+                new Claim(JwtRegisteredClaimNames.Email, result.Email),
             };
 
-           
-            
+            if (!string.IsNullOrEmpty(result.Role))
+            {
+                var userRole = result.Role.ToUpper();
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+
+                if (userRole == "WORKER" || userRole == "SHOPOWNERS" || userRole=="ADMIN")
+                {
+                    claims.Add(new Claim("HasAdminAccess", "true"));
+                }
+            }
+
+
+
 
             // var claims = jwtToken.Claims.Select(c => new Claim(c.Type, c.Value)).ToList();
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

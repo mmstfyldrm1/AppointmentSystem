@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "AddShopOwners";
+    Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
+}
+
+@model AddShopOwnersDto
+
+<<div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">İşletme Sahibi Bilgileri</h6>
+    <form method="post" enctype="multipart/form-data">
+        <!-- mutlaka ekle -->
+        <div class="mb-3">
+            <label asp-for="ShopOwnerPhone" class="form-label">Telefon</label>
+            <input type="text" asp-for="ShopOwnerPhone" class="form-control" />
+            <div class="form-text">
+                We'll never share your phone with anyone else.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image" class="form-label">Resim Seçiniz</label>
+            <input class="form-control form-control-lg" asp-for="Image" type="file" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary"> Kaydet </button>
+    </form>
+    <br />
+    <a href="/Admin/Shop/AddShop" class="btn btn-primary">İşletme Bilgileri</a>
+</div>
+

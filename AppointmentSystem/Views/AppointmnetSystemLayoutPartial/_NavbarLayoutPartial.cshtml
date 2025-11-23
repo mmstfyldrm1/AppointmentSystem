@@ -1,9 +1,10 @@
-﻿<header id="site-header" class="fixed-top">
+﻿@using System.Security.Claims
+<header id="site-header" class="fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg stroke">
             <h1>
                 <a class="navbar-brand mr-lg-5" href="index.html">
-                    Berber Randevu 
+                    Berber Randevu
                 </a>
             </h1>
             <!-- if logo is image enable this
@@ -35,16 +36,40 @@
                             <a class="nav-link" href="pricing.html">Profilim</a>
                         </li>
                     }
-                 
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Hakkımızda</a>
-                    </li>
+
+                    @if (User.IsInRole("WORKER") || User.IsInRole("SHOPOWNERS"))
+                    {
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Admin/Dashboard/Index">Admin Panel</a>
+                        </li>
+                    }
+
+                        
+                    @if (User.IsInRole("MEMBER"))   
+                    {
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Bizimle Çalışmak İstermisiniz</a>
+                        </li>
+                    }
 
                 </ul>
             </div>
-            <div class="d-lg-block d-none">
-                <a href="/auth/login" class="btn btn-style btn-secondary">Giriş Yap</a>
-            </div>
+
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <div class="d-lg-block d-none">
+                    <a href="/auth/logout" class="btn btn-style btn-secondary">Çıkış Yap</a>
+                </div>
+            }
+            @if (User.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                <div class="d-lg-block d-none">
+                    <a href="/auth/login" class="btn btn-style btn-secondary">Giriş Yap</a>
+                </div>
+            }
+
             <!-- toggle switch for light and dark theme -->
             <div class="mobile-position">
                 <nav class="navigation">

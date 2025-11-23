@@ -30,7 +30,7 @@ namespace AppointmentSystem.Controllers
             searchKeyValue = TempData["searchKeyValue"].ToString();
             propertyId = int.Parse(TempData["propertyId"].ToString());
             city = TempData["City"].ToString();
-            var queryObj = new { query = string.Format("select w.Name [WorkerName] ,s.Name [ShopName] ,t.Slot [Time] ,ap.AppointmentDate [AppointmentDate] from Dt_Appointments ap left join Dt_Workers w with(nolock) on w.Id=ap.WorkerId left join Dt_Shops s with(nolock) on s.Id=ap.ShopId left join Dt_TimeSlots t with(nolock) on t.Id=ap.TimeSlotId where ap.AppointmentDate='' and s.ShopAddress=''"), searchKeyValue, city };
+            var queryObj = new { query = string.Format("select w.Name [WorkerName] ,s.Name [Name] ,t.Slot [Time] ,ap.AppointmentDate [AppointmentDate] from Dt_Appointments ap left join Dt_Workers w with(nolock) on w.Id=ap.WorkerId left join Dt_Shops s with(nolock) on s.Id=ap.ShopId left join Dt_TimeSlots t with(nolock) on t.Id=ap.TimeSlotId where ap.AppointmentDate='' and s.ShopAddress=''"), searchKeyValue, city };
             var content = new StringContent(JsonConvert.SerializeObject(queryObj), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("https://localhost:7179/api/Query/execute", content);
             if (!response.IsSuccessStatusCode)

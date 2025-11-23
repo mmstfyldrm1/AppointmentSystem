@@ -116,7 +116,7 @@ namespace AppointmentSystem.Controllers
             sb.AppendLine("    Isnull(ts.Slot,'') AS [Time],");
             sb.AppendLine("    Isnull(w.Name,'') AS [WorkerName],");
             sb.AppendLine("    ISNULL(w.WorkerImg, '') AS [WorkerImg],");
-            sb.AppendLine("    ISNULL(s.Name,'') AS [ShopName],");
+            sb.AppendLine("    ISNULL(s.Name,'') AS [Name],");
             sb.AppendLine("    ISNULL(w.WorkerPhone,'') AS [WorkerPhone],");
             sb.AppendLine("    ISNULL(s.ShopPhone,'') AS [ShopPhone]");
             sb.AppendLine("FROM Dt_Workers w");
@@ -156,7 +156,7 @@ namespace AppointmentSystem.Controllers
             sb.AppendLine($"Isnull(ts.Slot,'') AS [Time],");
             sb.AppendLine($"Isnull(w.Name,'') AS [WorkerName],");
             sb.AppendLine($"ISNULL(w.WorkerImg, '') AS [WorkerImg],");
-            sb.AppendLine($"ISNULL(s.Name,'') AS [ShopName],");
+            sb.AppendLine($"ISNULL(s.Name,'') AS [Name],");
             sb.AppendLine($"ISNULL(w.WorkerPhone,'') AS [WorkerPhone],");
             sb.AppendLine($"ISNULL(s.ShopPhone,'') AS [ShopPhone]");
             sb.AppendLine($"from Dt_Appointments ap");
