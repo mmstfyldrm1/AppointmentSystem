@@ -35,7 +35,7 @@ namespace AppointmentSystemAPI.Controllers
                 UserName = dto.Email,
                 Email = dto.Email,
                 FullName = dto.FullName,
-                Role=dto.Role,
+               
 
             };
 
@@ -65,16 +65,17 @@ namespace AppointmentSystemAPI.Controllers
             var result = await _signInManager.PasswordSignInAsync(user, dto.Password, false, false);
             if (!result.Succeeded)
                 return Unauthorized("Geçersiz giriş");
+            var roles = await _userManager.GetRolesAsync(user);
 
-          
-            var token = _generateTokenService.CreateToken(user);
+            var token = await _generateTokenService.CreateToken(user);
             return Ok(new { 
                 
                 Token = token,
                 Id = user.Id,
                 FullName = user.FullName,
                 Email = user.Email,
-                UserName = user.UserName
+                UserName = user.UserName,
+                Role =roles
 
 
 

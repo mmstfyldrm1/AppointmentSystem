@@ -16,9 +16,9 @@ namespace AppointmentSystem.Controllers
     public class AuthController : Controller
     {
         private readonly HttpClient _httpClient;
-        
 
-       
+
+
 
         public AuthController(HttpClient httpClient)
         {
@@ -39,7 +39,7 @@ namespace AppointmentSystem.Controllers
             {
                 dto.Role = "WORKER";
             }
-            if (dto.Worker ==false && dto.ShopOwners==false)
+            if (dto.Worker == false && dto.ShopOwners == false)
             {
                 dto.Role = "MEMBER";
             }
@@ -77,26 +77,42 @@ namespace AppointmentSystem.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()), 
+                new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()),
                 new Claim(ClaimTypes.Name, result.UserName),
                 new Claim(JwtRegisteredClaimNames.Email, result.Email),
             };
 
-            if (!string.IsNullOrEmpty(result.Role))
-            {
-                var userRole = result.Role.ToUpper();
-                claims.Add(new Claim(ClaimTypes.Role, userRole));
 
-                if (userRole == "WORKER" || userRole == "SHOPOWNERS" || userRole=="ADMIN")
+            var roles = jwtToken.Claims
+               .Where(c => c.Type == "role" || c.Type == ClaimTypes.Role)
+               .Select(c => c.Value)
+               .ToList();
+
+            if (roles != null && roles.Any())
+            {
+                foreach (var role in roles)
                 {
-                    claims.Add(new Claim("HasAdminAccess", "true"));
+                    var userRole = role.ToUpper();
+                    claims.Add(new Claim(ClaimTypes.Role, userRole));
+
+                    // Admin veya özel yetkiler için ekstra claim
+                    if (userRole == "WORKER" || userRole == "SHOPOWNERS" || userRole == "ADMIN")
+                    {
+                        claims.Add(new Claim("HasAdminAccess", "true"));
+                    }
+                    else
+                    {
+                        // Diğer tüm roller MEMBER olarak eklenir
+                        claims.Add(new Claim(ClaimTypes.Role, "MEMBER"));
+                    }
                 }
             }
 
 
 
 
-            // var claims = jwtToken.Claims.Select(c => new Claim(c.Type, c.Value)).ToList();
+
+
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

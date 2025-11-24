@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AppointmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "SHOPOWNERS,WORKER")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

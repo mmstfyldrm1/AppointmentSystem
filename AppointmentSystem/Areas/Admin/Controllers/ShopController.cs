@@ -90,5 +90,12 @@ namespace AppointmentSystem.Areas.Admin.Controllers
             Console.WriteLine(errorJson);
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ShopList()
+        {
+
+            return View();
+        }
     }
 }
