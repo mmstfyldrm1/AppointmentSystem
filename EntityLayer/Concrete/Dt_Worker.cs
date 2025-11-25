@@ -15,6 +15,11 @@ namespace EntityLayer.Concrete
         public string WorkerPhone { get; set; }
 
         public string? WorkerImg { get; set; }
+
+        public DateTime? InsertedDate { get; set; }
+
+        public int? WorkerStatus { get; set; }
+
         public int? ShopId { get; set; }
         
         [JsonIgnore]

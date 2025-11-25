@@ -57,26 +57,9 @@ namespace AppointmentSystem.Areas.Admin.Controllers
             }
 
 
-          
-            var sb = new StringBuilder();
-            sb.AppendLine($"select top 1  Id from Dt_ShopOwners where ApplicationUserId=" + userId.ToString());
-            var queryObj = new
-            {
-                query = sb.ToString()
-            };
-
-            var content = new StringContent(JsonConvert.SerializeObject(queryObj), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7179/api/Query/execute", content);
-            if (!response.IsSuccessStatusCode)
-                return RedirectToAction("Index", "Error");
-
-
-            var jsonData = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject <List<ResponseDto>>(jsonData);
-            foreach (var item in values)
-            {
-                dto.ShopOwnerId = item.Id;
-            }
+            int Id = 0;
+            int.TryParse(User.FindFirst("ResultId").Value.ToString(), out Id);
+            dto.ShopOwnerId = Id;
             var shopOwnersDto = _mapper.Map<AddShopDto>(dto);
             var content1 = new StringContent(JsonConvert.SerializeObject(shopOwnersDto), Encoding.UTF8, "application/json");
             var response1 = await client.PostAsync("https://localhost:7179/api/Shop", content1);
@@ -99,25 +82,10 @@ namespace AppointmentSystem.Areas.Admin.Controllers
         {
             var client = _apiClientService.CreateClient();
             int userId = 0;
-            int ShopOwnerId = 0;
             int.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out userId);
             if (userId == 0) { return RedirectToAction("Index", "Dashboard"); }
-            var sb1 = new StringBuilder();
-            sb1.AppendLine($"select top 1  Id from Dt_ShopOwners where ApplicationUserId=" + userId.ToString());
-            var queryObj = new
-            {
-                query = sb1.ToString()
-            };
-
-            var content = new StringContent(JsonConvert.SerializeObject(queryObj), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:7179/api/Query/execute", content);
-            var jsonData = await response.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResponseDto>>(jsonData);
-            foreach (var item in values)
-            {
-                ShopOwnerId = item.Id;
-            }
-
+            int Id = 0;
+            int.TryParse(User.FindFirst("ResultId").Value.ToString(), out Id);
             var sb = new StringBuilder();
             sb.AppendLine($"select ");
             sb.AppendLine($"ISNULL(s.Name,'') Name");
@@ -132,7 +100,7 @@ namespace AppointmentSystem.Areas.Admin.Controllers
             sb.AppendLine($"outer apply (select COUNT(*) [Randevu] from  Dt_Appointments ap where s.Id=ap.ShopId) ap");
             sb.AppendLine($"outer apply (select COUNT(*) [DayRandevu] from  Dt_Appointments ap where s.Id=ap.ShopId and ap.AppointmentDate='{DateTime.Now:yyyy-MM-dd}') ap2");
             sb.AppendLine($"outer apply (select COUNT(*) [Worker] from  Dt_Workers w where s.Id=w.ShopId) w");
-            sb.AppendLine($"where so.Id ={ShopOwnerId} ");
+            sb.AppendLine($"where so.Id ={Id} ");
             var queryObj2 = new
             {
                 query = sb.ToString()

@@ -1,19 +1,22 @@
-﻿@{
-    ViewData["Title"] = "ShopList";
+﻿
+@{
+    ViewData["Title"] = "WorkerList";
     Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
     int count = 0;
 }
-@model List<AdminPanelShopListDto>
+
+@model List<AdminPanelWorkerDto>
+
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">İşletme İsmi</th>
+                <th scope="col">Çalışan İsmi</th>
                 <th scope="col">Telefon </th>
-                <th scope="col">Adres</th>
+                <th scope="col">İşletme İsmi</th>
                 <th scope="col">Durumu</th>
-                <th scope="col">Aktif Berber</th>
+                <th scope="col">Başlangıç Tarihi</th>
                 <th scope="col">Tp Randevu Sayısı</th>
                 <th scope="col">Bugun Randevu Sayısı</th>
             </tr>
@@ -23,11 +26,11 @@
             {
                 <tr>
                     <th scope="row">@count</th>
-                    <td>@item.Name</td>
-                    <td>@item.ShopPhone</td>
-                    <td>@item.ShopAddress</td>
+                    <td>@item.WorkerName</td>
+                    <td>@item.WorkerPhone</td>
+                    <td>@item.ShopName</td>
                     <td>@item.Status</td>
-                    <td>@item.WorkerCount</td>
+                    <td>@item.InsertedDate</td>
                     <td>@item.TotalAppointmentCount</td>
                     <td>@item.TodayTotalAppointmentCount</td>
                 </tr>

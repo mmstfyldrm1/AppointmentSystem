@@ -76,7 +76,8 @@ namespace AppointmentSystemAPI.Controllers
                 FullName = user.FullName,
                 Email = user.Email,
                 UserName = user.UserName,
-                Role =roles
+                Role =roles,
+                
 
 
 

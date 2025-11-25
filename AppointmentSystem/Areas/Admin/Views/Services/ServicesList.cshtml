@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "ServicesList";
+    Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
+    int count = 0;
+}
+
+@model List<AdminPanelServicesListDto>
+
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Hizmet İsmi</th>
+            <th scope="col">Hizmet Tipi</th>
+            <th scope="col">Açıklaması </th>
+            <th scope="col">Fiyatı</th>
+            <th scope="col">İşletme İsmi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.ServicesName</td>
+                <td>@item.ServicesType</td>
+                <td>@item.Explanation</td>
+                <td>@item.Price</td>
+                <td>@item.ShopName</td>
+               
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>
+</div>
+

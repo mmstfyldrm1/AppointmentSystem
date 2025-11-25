@@ -30,7 +30,11 @@
                 <a href="~/Admin/Shop/ShopList" class="nav-item nav-link"><i class="fa fa-th me-2"></i>İşletme Listesi</a>
                 <a href="~/Admin/Worker/WorkerList" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Çalışan Listesi</a>
             }
-            <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
+
+            @if (User.IsInRole("SHOPOWNERS") || User.IsInRole("ADMIN") || User.IsInRole("WORKER"))
+            {
+                <a href="~/Admin/Services/ServicesList" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Hizmetler</a>
+            }
             <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
