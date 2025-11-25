@@ -67,6 +67,7 @@ namespace AppointmentSystemAPI.Controllers
                 return Unauthorized("Geçersiz giriş");
             var roles = await _userManager.GetRolesAsync(user);
 
+
             var token = await _generateTokenService.CreateToken(user);
             return Ok(new { 
                 

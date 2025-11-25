@@ -75,12 +75,14 @@ namespace AppointmentSystem.Controllers
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(result.Token);
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()),
-                new Claim(ClaimTypes.Name, result.UserName),
-                new Claim(JwtRegisteredClaimNames.Email, result.Email),
-            };
+            //var claims = new List<Claim>
+            //{
+            //    new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()),
+            //    new Claim(ClaimTypes.Name, result.UserName),
+            //    new Claim(JwtRegisteredClaimNames.Email, result.Email),
+            //};
+
+            var claims = jwtToken.Claims.ToList();
 
 
             var roles = jwtToken.Claims
