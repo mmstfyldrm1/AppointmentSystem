@@ -70,7 +70,7 @@
             @foreach (var item in Model)
             {
                 <div class="col-lg-6 col-md-6 mb-4">
-                    <a href="/AppointmentSystem/AddAppointment?workerId=@item.WorkerId&shopId=@item.ShopId&timeSlotId=@item.TimeSlotId&date=@item.Time"  style="text-decoration:none; color:inherit;">
+                    <a href="/AppointmentSystem/AddAppointment?time=@item.Time&shopName=@item.ShopName&ShopId=@item.ShopId&WorkerId=@item.WorkerId&TimeSlotId=@item.TimeSlotId&workerName=@item.WorkerName&date=@item.Date.ToString("yyyy-MM-dd")" style="text-decoration:none; color:inherit;">
                         <div class="appointment-card p-4">
 
                             <div class="row align-items-center">

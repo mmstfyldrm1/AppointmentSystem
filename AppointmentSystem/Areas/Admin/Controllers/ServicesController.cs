@@ -60,6 +60,9 @@ namespace AppointmentSystem.Areas.Admin.Controllers
             }).ToList();
 
 
+
+
+
             return View();
         }
 

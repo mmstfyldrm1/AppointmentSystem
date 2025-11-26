@@ -29,7 +29,14 @@ namespace DTOLayer.AppointmentDtos
 
         public int AppointmentStatus { get; set; }
 
+        public int ServicesId { get; set; }
+
         public int ShopId { get; set; }
+        public string WorkerName { get; set; }
+
+        public string ShopName { get; set; }
+
+        public string TimeSlot { get; set; }
 
 
     }

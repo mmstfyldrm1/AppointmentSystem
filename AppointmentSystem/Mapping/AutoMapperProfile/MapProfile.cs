@@ -19,6 +19,9 @@ namespace AppointmentSystem.Mapping.AutoMapperProfile
             CreateMap<Dt_Service, AdminPanelAddServicesDto>();
             CreateMap<AdminPanelAddServicesDto, Dt_Service>();
 
+            CreateMap<Dt_AppointmentService, CreateAppointmentServicesDto>();
+            CreateMap<CreateAppointmentServicesDto, Dt_AppointmentService>();
+
         }
 	}
 }

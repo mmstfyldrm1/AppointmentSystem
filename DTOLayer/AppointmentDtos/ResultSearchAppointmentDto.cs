@@ -22,6 +22,8 @@ namespace DTOLayer.AppointmentDtos
         public string? ShopName { get; set; }
         public string? WorkerPhone { get; set; }
 
+        public DateTime Date { get; set; }
+
         public string? ShopPhone { get; set; }
     }
 }
