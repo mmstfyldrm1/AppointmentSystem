@@ -41,7 +41,7 @@ namespace AppointmentSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddAppointment( string WorkerId, string TimeSlotId ,string shopId, string time, string shopName, string workerName, string date)
+        public async Task<IActionResult> AddAppointment(string WorkerId, string TimeSlotId, string shopId, string time, string shopName, string workerName, string date)
         {
             var client = _apiClientService.CreateClient();
             Dictionary<int, string> ServicesList = new Dictionary<int, string>();
@@ -111,12 +111,12 @@ namespace AppointmentSystem.Controllers
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Randevu Oluşturuldu";
-              
+
             }
 
             int AppointmentId = 0;
             var sb = new StringBuilder();
-            if(createAppointmentDtos.ShopId ==null || createAppointmentDtos.TimeSlotId == null || createAppointmentDtos.WorkerId ==null )
+            if (createAppointmentDtos.ShopId == null || createAppointmentDtos.TimeSlotId == null || createAppointmentDtos.WorkerId == null)
             { TempData["Error"] = "Hata"; }
             sb.AppendLine($"select Id  from Dt_Appointments where ApplicationUserId ={User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value} and ShopId ={createAppointmentDtos.ShopId} and WorkerId = {createAppointmentDtos.WorkerId} ");
             var queyobj = new { query = sb.ToString() };
@@ -127,13 +127,14 @@ namespace AppointmentSystem.Controllers
 
             var jsonData1 = await response1.Content.ReadAsStringAsync();
             var values2 = JsonConvert.DeserializeObject<List<ResponseDto>>(jsonData1);
-
-            foreach (var item in values2)
+            if (values2 != null)
             {
-                AppointmentId = item.Id;
+                foreach (var item in values2)
+                {
+                    AppointmentId = item.Id;
+                }
             }
-
-            CreateAppointmentServicesDto createAppointmentServicesDto= new CreateAppointmentServicesDto();
+            CreateAppointmentServicesDto createAppointmentServicesDto = new CreateAppointmentServicesDto();
             createAppointmentServicesDto.AppointmentId = AppointmentId;
             createAppointmentServicesDto.ServicesId = createAppointmentDtos.ServicesId;
 
@@ -247,7 +248,7 @@ namespace AppointmentSystem.Controllers
             sb.AppendLine($"Isnull(ts.Slot,'') AS [Time],");
             sb.AppendLine($"Isnull(w.Name,'') AS [WorkerName],");
             sb.AppendLine($"ISNULL(w.WorkerImg, '') AS [WorkerImg],");
-            sb.AppendLine($"ISNULL(s.Name,'') AS [Name],");
+            sb.AppendLine($"ISNULL(s.Name,'') AS [ShopName],");
             sb.AppendLine($"ISNULL(w.WorkerPhone,'') AS [WorkerPhone],");
             sb.AppendLine($"ISNULL(s.ShopPhone,'') AS [ShopPhone]");
             sb.AppendLine($"from Dt_Appointments ap");

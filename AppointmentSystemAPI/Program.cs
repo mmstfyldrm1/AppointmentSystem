@@ -1,4 +1,5 @@
 using ApiLayer.Containers;
+using AppointmentSystemAPI.Hubs;
 using AppointmentSystemAPI.Services;
 using DataAccsessLayer.Concrete;
 using DataAccsessLayer.Concrete.UoW;
@@ -36,6 +37,9 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+builder.Services.AddSignalR();
+
+
 
 
 builder.Services.AddScoped<ApiClientService>();
@@ -73,7 +77,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
-
+app.MapHub<NotificationHub>("/notificationHub");
 app.UseAuthorization();
 
 app.MapControllers();

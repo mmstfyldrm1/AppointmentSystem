@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Views\Shared\Components\_AppointmentSystemAdminHeadComponentPartial\**" />
+    <Content Remove="Areas\Admin\Views\Shared\Components\_AppointmentSystemAdminHeadComponentPartial\**" />
+    <EmbeddedResource Remove="Areas\Admin\Views\Shared\Components\_AppointmentSystemAdminHeadComponentPartial\**" />
+    <None Remove="Areas\Admin\Views\Shared\Components\_AppointmentSystemAdminHeadComponentPartial\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
@@ -32,7 +39,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\Components\_AppointmentSystemAdminHeadComponentPartial\" />
     <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 

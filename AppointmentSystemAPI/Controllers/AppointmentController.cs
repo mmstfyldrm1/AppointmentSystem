@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using DataAccsessLayer.Concrete.UoW;
+using AppointmentSystemAPI.Services;
 
 
 namespace AppointmentSystemAPI.Controllers
@@ -11,13 +12,13 @@ namespace AppointmentSystemAPI.Controllers
     [ApiController]
     public class AppointmentController : ControllerBase
     {
-       private readonly IAppointmentService _appointmentService;
+        private readonly IAppointmentService _appointmentService;
+        private readonly NotificationService _notificationService;
 
-      
-
-        public AppointmentController(IAppointmentService appointmentService)
+        public AppointmentController(IAppointmentService appointmentService, NotificationService notificationService)
         {
             _appointmentService = appointmentService;
+            _notificationService = notificationService;
         }
 
         [HttpGet]
@@ -38,10 +39,14 @@ namespace AppointmentSystemAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] Dt_Appointment appointment)
+        public async Task<IActionResult> Add([FromBody] Dt_Appointment appointment)
         {
             appointment.AppointmentDate = appointment.AppointmentDate.Date;
             _appointmentService.Add(appointment);
+
+            await _notificationService.SendToWorker(appointment.WorkerId.ToString(),
+                    $"Yeni randevu: {appointment.AppointmentDate} {appointment.TimeSlotId.ToString()}");
+
             return Ok("Ok");
         }
 

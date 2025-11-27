@@ -1,4 +1,8 @@
-﻿<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+﻿@{
+    ViewBag.WorkerId = User.FindFirst("ResultId")?.Value;
+}
+
+<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
     </a>
@@ -85,3 +89,30 @@
         </div>
     </div>
 </nav>
+
+@section Scripts {
+    <script>
+        // WorkerId backend'den ViewBag ile geçebilir
+        const workerId = '@ViewBag.WorkerId';
+
+        // SignalR connection oluştur
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/notificationHub") // API tarafındaki hub URL
+            .build();
+
+        // Başlat
+        connection.start()
+            .then(() => {
+                console.log("SignalR bağlantısı kuruldu.");
+                // Worker kendi grubuna katılıyor
+                connection.invoke("JoinGroup", workerId);
+            })
+            .catch(err => console.error(err.toString()));
+
+        // Bildirim geldiğinde çalışacak
+        connection.on("ReceiveNotification", message => {
+            // Burada alert veya toast gösterebilirsin
+            alert("Yeni randevu: " + message);
+        });
+    </script>
+}
