@@ -15,7 +15,11 @@ namespace AppointmentSystem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "AppointmentSystem");
+            }
+            return RedirectToAction("login", "Auth");
         }
 
         public IActionResult Privacy()

@@ -38,7 +38,7 @@ namespace AppointmentSystem.Areas.Admin.ViewComponents.Default
             sb.AppendLine($"    -- Toplam Randevu");
             sb.AppendLine($"    (SELECT COUNT(*) ");
             sb.AppendLine($"     FROM Dt_Appointments A");
-            sb.AppendLine($"     WHERE A.ShopId IN (SELECT Id FROM Dt_Shops WHERE ShopOwnerId = {ResultId})");
+            sb.AppendLine($"     WHERE  A.ShopId IN (SELECT Id FROM Dt_Shops WHERE ShopOwnerId = {ResultId})");
             sb.AppendLine($"    ) AS AppointmentCount,");
             sb.AppendLine($"");
             sb.AppendLine($"    -- Toplam Dükkan Sayısı");
@@ -50,7 +50,7 @@ namespace AppointmentSystem.Areas.Admin.ViewComponents.Default
             sb.AppendLine($"    -- İptal Edilen Randevu Sayısı");
             sb.AppendLine($"    (SELECT COUNT(*) ");
             sb.AppendLine($"     FROM Dt_Appointments A1");
-            sb.AppendLine($"     WHERE A1.AppointmentStatus = 0");
+            sb.AppendLine($"     WHERE A1.IsClosed = 1");
             sb.AppendLine($"       AND A1.ShopId IN (SELECT Id FROM Dt_Shops WHERE ShopOwnerId = {ResultId})");
             sb.AppendLine($"    ) AS AppointmentCancelCount;");
 

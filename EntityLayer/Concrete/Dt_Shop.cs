@@ -18,6 +18,8 @@ namespace EntityLayer.Concrete
 
         public string ShopAddress { get; set; }
 
+        public int Status { get; set; }
+
         public string ShopPhone { get; set; }
 
         [JsonIgnore]

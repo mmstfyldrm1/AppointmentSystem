@@ -13,7 +13,7 @@ namespace EntityLayer.Concrete
         public string Message { get; set; }
         public DateTime Date { get; set; }
 
-        public string? ApplicationUserId { get; set; } //FK
+        public int ApplicationUserId { get; set; } //FK
        
         [JsonIgnore]
         public  Dt_ApplicationUser? ApplicationUser { get; set; } // Navigation property

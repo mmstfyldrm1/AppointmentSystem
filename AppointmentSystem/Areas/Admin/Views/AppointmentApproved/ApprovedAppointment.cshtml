@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "ApprovedAppointment";
+    Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
+}
+
+@model List<ApprovedAppointmentDto>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Approved Appointments</h6>
+            <a href="">Show All</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Kullanıcı</th>
+                        <th scope="col">Berber</th>
+                        <th scope="col">Hizmet</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">Kapalı</th>
+                        <th scope="col">Periyot</th>
+                        <th scope="col">Durum</th>
+                        <th scope="col">İşlem</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><input class="form-check-input" type="checkbox"></td>
+                            <td>@item.AppointmentDate</td>
+                            <td>@item.UserName</td>
+                            <td>@item.WorkerName</td>
+                            <td>@item.ServiceName</td>
+                            <td>@item.Price</td>
+                            <td>@item.IsClosed</td>
+                            <td>@item.TimeSlot</td>
+                            <td>@item.AppointmentStatus</td>
+                            <td>
+                                <a asp-area="Admin"
+                                   asp-controller="AppointmentApproved"
+                                   asp-action="ApproveAppointment"
+                                   asp-route-id="@item.AppointmentId"
+                                   class="btn btn-sm btn-primary">
+                                    Onayla
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

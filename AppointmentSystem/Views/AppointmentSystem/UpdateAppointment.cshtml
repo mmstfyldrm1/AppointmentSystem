@@ -1,0 +1,120 @@
+﻿@using EntityLayer.Concrete
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@model UpdateAppointmentDto
+
+@{
+    ViewData["Title"] = "UpdateAppointment";
+    Layout = "~/Views/Shared/_AppointmentSystemLayout.cshtml";
+}
+
+<section class="py-5" style="background: linear-gradient(135deg, #f8f9ff, #eef1ff);">
+    <div class="container py-4">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold mb-2" style="font-size: 2.2rem; color:#1a237e;">
+                        Randevu Güncelle
+                    </h2>
+                    <p class="text-muted">
+                        Aşağıdaki formdan seçtiğiniz randevuyu hızlıca güncelleyebilirsiniz.
+                    </p>
+                    <div style="width:90px; height:4px; background:#1a237e; border-radius: 10px;" class="mx-auto mt-3"></div>
+                </div>
+
+                <!-- Form -->
+                <form method="post" asp-action="UpdateAppointment" class="p-5 shadow-lg rounded-4 bg-white border">
+                    <input type="hidden" name="_method" value="PUT" />
+
+                    <div class="row g-4">
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" asp-for="WorkerId" name="WorkerId" value="@ViewBag.WorkerId" />
+                        <input type="hidden" asp-for="ShopId" name="ShopId" value="@ViewBag.ShopId" />
+                        <input type="hidden" asp-for="TimeSlotId" name="TimeSlotId" value="@ViewBag.TimeSlotId" />
+
+                        <!-- Tarih -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">📅 Randevu Tarihi</label>
+                            <input type="date" asp-for="AppointmentDate"
+                                   value="@ViewBag.Date"
+                                   class="form-control form-control-lg rounded-3"
+                                   required />
+                        </div>
+
+                        <!-- Ad Soyad -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">👤 Ad Soyad</label>
+                            <input type="text" asp-for="UserName"
+                                   value="@User.FindFirst("FullName")?.Value"
+                                   class="form-control form-control-lg rounded-3"
+                                   readonly />
+                        </div>
+
+                        <!-- Çalışan -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">💈 Çalışan</label>
+                            <select name="WorkerId" asp-items="@ViewBag.Worker"
+                                    class="form-select form-select-lg rounded-3">
+                                <option value="">Çalışan Seçiniz</option>
+                            </select>
+                        </div>
+
+                        <!-- Saat -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">⏰ Saat</label>
+                            <select name="TimeSlotId" asp-items="@ViewBag.TimeSlot"
+                                    class="form-select form-select-lg rounded-3">
+                                <option value="">Saat Seçiniz</option>
+                            </select>
+                        </div>
+
+                        <!-- Telefon -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">📞 Telefon</label>
+                            <input type="text" asp-for="UserPhone"
+                                   class="form-control form-control-lg rounded-3"
+                                   placeholder="05xx xxx xx xx"
+                                   required />
+                        </div>
+
+                        <!-- Hizmet -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">🛠 Hizmet</label>
+                            <select name="ServicesId" asp-items="@ViewBag.Services"
+                                    class="form-select form-select-lg rounded-3">
+                                <option value="">Hizmet Seçiniz</option>
+                            </select>
+                        </div>
+
+                        <!-- Açıklama -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">✏️ Açıklama</label>
+                            <textarea asp-for="Explanation"
+                                      class="form-control form-control-lg rounded-3"
+                                      rows="4"
+                                      placeholder="Açıklama yazınız..."
+                                      required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button class="btn btn-lg px-5 py-3 rounded-4 shadow-sm text-white" type="submit"
+                                style="background: linear-gradient(135deg, #3949ab, #1a237e); font-size:1.1rem;">
+                            💾 Randevuyu Güncelle
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

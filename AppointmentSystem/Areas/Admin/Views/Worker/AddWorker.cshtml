@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "AddWorker";
+    Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
+}
+@model CreateWorkerDto
+
+<div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">Yeni Çalışan</h6>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Çalışan İsim</label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <div class="form-text">
+               
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input type="text" asp-for="Email" class="form-control" />
+            <div class="form-text">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="WorkerPhone" class="form-label">Telefon </label>
+            <input class="form-control form-control-lg" asp-for="WorkerPhone" type="text" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="InsertedDate" class="form-label">Giriş Tarihi</label>
+            <input type="date" asp-for="InsertedDate" class="form-control" />
+            <div class="form-text">
+              
+            </div>
+        </div>
+        <div class="mb-3">
+            <select name="ShopId" asp-items="ViewBag.Shops" class="form-control">
+                <option value="">İşletme Seçiniz</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image" class="form-label">Resim Seçiniz</label>
+            <input class="form-control form-control-lg" asp-for="Image" type="file" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary"> Kaydet </button>
+    </form>
+    <br />
+  
+</div>
+

@@ -17,7 +17,7 @@ namespace DTOLayer.ServicesDtos
         public string Explanation { get; set; }
 
 
-        public string ServicesType { get; set; }    
+        public int ServicesType { get; set; }    
 
 
        

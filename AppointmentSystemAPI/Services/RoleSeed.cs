@@ -12,11 +12,14 @@ namespace AppointmentSystemAPI.Services
 
             string[] roles = { "Admin", "Editor", "User" };
 
-            foreach (var role in roles)
-            {
-                if (!await roleManager.RoleExistsAsync(role))
+            if(roles != null) 
+            { 
+                foreach (var role in roles)
                 {
-                    await roleManager.CreateAsync(new Dt_ApplicationRole { Name = role });
+                    if (!await roleManager.RoleExistsAsync(role))
+                    {
+                        await roleManager.CreateAsync(new Dt_ApplicationRole { Name = role });
+                    }
                 }
             }
         }

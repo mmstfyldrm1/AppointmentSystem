@@ -60,6 +60,22 @@
 
 <section class="w3l-grids-3 py-5">
     <div class="container py-md-5">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <form method="post" action="@Url.Action("AppointmentList", "AppointmentSystem")" class="row g-2 align-items-center">
+                    <div class="col-md-5">
+                        <input type="text" name="Worker" class="form-control" placeholder="Çalışan Adı" value="@ViewBag.WorkerFilter" />
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="Shop" class="form-control" placeholder="Dükkan Adı" value="@ViewBag.ShopFilter" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Ara</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="title-content text-left mb-lg-5 mb-4">
             <h6 class="sub-title">Visit</h6>
             <h3 class="hny-title">Uygun Randevular</h3>

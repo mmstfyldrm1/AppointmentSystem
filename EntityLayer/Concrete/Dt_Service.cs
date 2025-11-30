@@ -14,6 +14,8 @@ namespace EntityLayer.Concrete
         public string ServiceName { get; set; }
         public decimal Price { get; set; }
 
+        public int ServicesType { get; set; }
+
         public int ShopId { get; set; }
        
         [JsonIgnore]

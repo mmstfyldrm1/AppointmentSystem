@@ -4,12 +4,25 @@
 }
 
 
+
 <!-- Sale & Revenue Start -->
 @await Component.InvokeAsync("_AdminPanelStatisticComponentPartial")
 <!-- Sale & Revenue End -->
 <!-- Sales Chart Start -->
 @await Component.InvokeAsync("_AdminPanelChartComponentPartial")
 <!-- Sales Chart End -->
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Bildirim</strong>
+            <small>şimdi</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Yeni randevu!
+        </div>
+    </div>
+</div>
 <!-- Recent Sales Start -->
 @await Component.InvokeAsync("_AdminPanelUpcomingAppointmentsComponentPartial")
 <!-- Recent Sales End -->

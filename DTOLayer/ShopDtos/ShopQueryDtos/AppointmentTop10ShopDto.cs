@@ -9,7 +9,7 @@ namespace DTOLayer.ShopDtos.ShopQueryDtos
 {
     public class AppointmentTop10ShopDto
     {
-        public string Name { get; set; }
+        public string ShopName { get; set; }
 
         public int ShopOwnerId { get; set; }
 

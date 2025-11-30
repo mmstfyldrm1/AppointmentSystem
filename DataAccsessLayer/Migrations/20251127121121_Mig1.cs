@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccsessLayer.Migrations
 {
-    public partial class FixShopOwnerFK : Migration
+    public partial class Mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -207,17 +207,17 @@ namespace DataAccsessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApplicationUserId1 = table.Column<int>(type: "int", nullable: true)
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dt_Notifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dt_Notifications_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_Dt_Notifications_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,6 +227,9 @@ namespace DataAccsessLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShopOwnerImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShopOwnerPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ApplicationUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -247,7 +250,10 @@ namespace DataAccsessLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShopOwnerId = table.Column<int>(type: "int", nullable: false)
+                    ShopOwnerId = table.Column<int>(type: "int", nullable: false),
+                    ShopImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShopAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShopPhone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -269,6 +275,7 @@ namespace DataAccsessLayer.Migrations
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ShopId = table.Column<int>(type: "int", nullable: true),
+                    ProductImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductCategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -314,17 +321,28 @@ namespace DataAccsessLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShopId = table.Column<int>(type: "int", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkerPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkerImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InsertedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    WorkerStatus = table.Column<int>(type: "int", nullable: true),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
+                    ShopId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dt_Workers", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Dt_Workers_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Dt_Workers_Dt_Shops_ShopId",
                         column: x => x.ShopId,
                         principalTable: "Dt_Shops",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -334,10 +352,18 @@ namespace DataAccsessLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AppointmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
-                    ShopId = table.Column<int>(type: "int", nullable: false),
-                    WorkerId = table.Column<int>(type: "int", nullable: false),
-                    TimeSlotId = table.Column<int>(type: "int", nullable: false)
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: true),
+                    IsClosed = table.Column<int>(type: "int", nullable: false),
+                    InsertadDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Explanation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserSurname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AppointmentStatus = table.Column<int>(type: "int", nullable: false),
+                    ShopId = table.Column<int>(type: "int", nullable: true),
+                    WorkerId = table.Column<int>(type: "int", nullable: true),
+                    TimeSlotId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -467,17 +493,17 @@ namespace DataAccsessLayer.Migrations
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     AppointmentId = table.Column<int>(type: "int", nullable: true),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ApplicationUserId1 = table.Column<int>(type: "int", nullable: true)
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dt_Reviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dt_Reviews_AspNetUsers_ApplicationUserId1",
-                        column: x => x.ApplicationUserId1,
+                        name: "FK_Dt_Reviews_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Dt_Reviews_Dt_Appointments_AppointmentId",
                         column: x => x.AppointmentId,
@@ -572,9 +598,9 @@ namespace DataAccsessLayer.Migrations
                 filter: "[AppointmentId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dt_Notifications_ApplicationUserId1",
+                name: "IX_Dt_Notifications_ApplicationUserId",
                 table: "Dt_Notifications",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dt_Payments_AppointmentId",
@@ -594,9 +620,9 @@ namespace DataAccsessLayer.Migrations
                 column: "ShopId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dt_Reviews_ApplicationUserId1",
+                name: "IX_Dt_Reviews_ApplicationUserId",
                 table: "Dt_Reviews",
-                column: "ApplicationUserId1");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dt_Reviews_AppointmentId",
@@ -617,6 +643,11 @@ namespace DataAccsessLayer.Migrations
                 name: "IX_Dt_Shops_ShopOwnerId",
                 table: "Dt_Shops",
                 column: "ShopOwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dt_Workers_ApplicationUserId",
+                table: "Dt_Workers",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dt_Workers_ShopId",

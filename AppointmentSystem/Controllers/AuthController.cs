@@ -50,6 +50,9 @@ namespace AppointmentSystem.Controllers
                 return RedirectToAction("Login");
             }
 
+
+            var errorJson = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(errorJson);
             ViewBag.Error = "Kayıt başarısız!";
             return View(dto);
         }
@@ -71,7 +74,6 @@ namespace AppointmentSystem.Controllers
             var responseContent = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<UserInfoDtos>(responseContent);
 
-            // Token'ı decode et
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(result.Token);
 
@@ -97,28 +99,24 @@ namespace AppointmentSystem.Controllers
                     var userRole = role.ToUpper();
                     claims.Add(new Claim(ClaimTypes.Role, userRole));
 
-                    // Admin veya özel yetkiler için ekstra claim
+                    
                     if (userRole == "WORKER" || userRole == "SHOPOWNERS" || userRole == "ADMIN")
                     {
                         claims.Add(new Claim("HasAdminAccess", "true"));
                     }
                     else
                     {
-                        // Diğer tüm roller MEMBER olarak eklenir
+                        
                         claims.Add(new Claim(ClaimTypes.Role, "MEMBER"));
                     }
                 }
             }
 
 
-
-
-
-
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            // Cookie oluştur
+            
             Response.Cookies.Append("AuthToken", result.Token, new CookieOptions { HttpOnly = true, Secure = true });
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties

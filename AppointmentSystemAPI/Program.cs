@@ -38,6 +38,7 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddSignalR();
+builder.Services.AddScoped<NotificationService>();
 
 
 

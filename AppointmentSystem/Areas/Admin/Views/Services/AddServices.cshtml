@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "AddServices";
     Layout = "~/Areas/Admin/Views/Shared/_AppointmentSystemAdminLayout.cshtml";
 }
@@ -13,30 +12,29 @@
             <label asp-for="ServiceName" class="form-label">Hizmet İsmi</label>
             <input type="" asp-for="ServiceName" class="form-control" />
             <div class="form-text">
-               
             </div>
         </div>
         <div class="mb-3">
             <label asp-for="Explanation" class="form-label">Açıklama</label>
             <input type="text" asp-for="Explanation" class="form-control" />
             <div class="form-text">
-               
             </div>
         </div>
         <div class="mb-3">
             <label asp-for="Price" class="form-label">Fiyat</label>
             <input type="number" asp-for="Price" class="form-control" />
             <div class="form-text">
-               
             </div>
         </div>
         <div class="mb-3">
-            <label asp-for="ServicesType" class="form-label">İşletme</label>
-            <input class="form-control form-control-lg" asp-for="ServicesType" type="text" />
+            <label asp-for="ServicesType" class="form-label">Servis İşlemi</label>
+            <input class="form-control form-control-lg" asp-for="ServicesType" type="number" />
         </div>
-        <select name="ShopId" asp-items="ViewBag.Services" class="form-control">
-            <option value="">İşletme Seçiniz</option>
-        </select>
+        <div class="mb-3">
+            <select name="ShopId" asp-items="ViewBag.Shops" class="form-control">
+                <option value="">İşletme Seçiniz</option>
+            </select>
+        </div>
         <hr />
         <button type="submit" class="btn btn-primary">Kaydet</button>
     </form>

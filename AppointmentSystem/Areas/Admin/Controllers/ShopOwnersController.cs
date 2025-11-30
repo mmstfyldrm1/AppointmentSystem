@@ -1,6 +1,7 @@
 ﻿using AppointmentSystem.Services;
 using AutoMapper;
 using DTOLayer.AppointmentDtos;
+using DTOLayer.ShopOwnersDtos;
 using DTOLayer.ShopOwnersDtos.AddShopOwnerDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,7 @@ namespace AppointmentSystem.Areas.Admin.Controllers
 
             int userId = 0;
             int.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out userId);
+            
             if (dto.Image != null)
             {
                 var resource = Directory.GetCurrentDirectory();
@@ -55,10 +57,59 @@ namespace AppointmentSystem.Areas.Admin.Controllers
             }
             dto.ApplicationUserId = userId;
             dto.Name = User.FindFirst(ClaimTypes.Name)?.Value;
+            dto.Email= User.FindFirst(ClaimTypes.Name)?.Value;
             var client = _apiClientService.CreateClient();
             var shopOwnersDto = _mapper.Map<AddShopOwnersDto>(dto);
             var content = new StringContent(JsonConvert.SerializeObject(shopOwnersDto), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("https://localhost:7179/api/ShopOwner", content);
+            if (response.IsSuccessStatusCode)
+            {
+
+                return View();
+            }
+
+
+
+            var errorJson = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(errorJson);
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateShopOwners()
+        {
+
+            return View();
+        }
+        
+        [HttpPost]
+        [Route("[controller]/[action]")]
+        public async Task<IActionResult> UpdateShopOwners(UpdateShopOwnersDto dto)
+        {
+
+            int userId = 0;
+            int.TryParse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value, out userId);
+
+            if (dto.Image != null)
+            {
+                var resource = Directory.GetCurrentDirectory();
+                var extension = Path.GetExtension(dto.Image.FileName);
+                var ImageName = Guid.NewGuid() + extension;
+                var saveLacotion = resource + "/wwwroot/userimages/" + ImageName;
+                var stream = new FileStream(saveLacotion, FileMode.Create);
+                await dto.Image.CopyToAsync(stream);
+                dto.ShopOwnerImg = ImageName;
+            }
+
+            int Id = 0;
+            int.TryParse(User.FindFirst("ResultId")?.Value,out Id);
+            dto.ApplicationUserId = userId;
+            dto.Id= Id; 
+            dto.Email = User.FindFirst(ClaimTypes.Name)?.Value;
+            var client = _apiClientService.CreateClient();
+            var shopOwnersDto = _mapper.Map<UpdateShopOwnersDto>(dto);
+            var content = new StringContent(JsonConvert.SerializeObject(shopOwnersDto), Encoding.UTF8, "application/json");
+            var response = await client.PutAsync("https://localhost:7179/api/ShopOwner", content);
             if (response.IsSuccessStatusCode)
             {
 

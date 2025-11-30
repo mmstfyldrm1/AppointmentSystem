@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccsessLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251114145934_FixShopOwnerFK")]
-    partial class FixShopOwnerFK
+    [Migration("20251127121121_Mig1")]
+    partial class Mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,19 +133,43 @@ namespace DataAccsessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ApplicationUserId")
+                    b.Property<int?>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ShopId")
+                    b.Property<int>("AppointmentStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeSlotId")
+                    b.Property<string>("Explanation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertadDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IsClosed")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkerId")
+                    b.Property<int?>("ShopId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TimeSlotId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserSurname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("WorkerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -242,10 +266,7 @@ namespace DataAccsessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ApplicationUserId1")
+                    b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -257,7 +278,7 @@ namespace DataAccsessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Dt_Notifications");
                 });
@@ -330,6 +351,9 @@ namespace DataAccsessLayer.Migrations
                     b.Property<int?>("ProductCategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ProductImg")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -371,10 +395,7 @@ namespace DataAccsessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ApplicationUserId1")
+                    b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("AppointmentId")
@@ -389,7 +410,7 @@ namespace DataAccsessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("AppointmentId");
 
@@ -433,8 +454,19 @@ namespace DataAccsessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ShopAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShopImg")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ShopOwnerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ShopPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -454,8 +486,18 @@ namespace DataAccsessLayer.Migrations
                     b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShopOwnerImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShopOwnerPhone")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -490,14 +532,36 @@ namespace DataAccsessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InsertedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShopId")
+                    b.Property<int?>("ShopId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkerImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkerPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("WorkerStatus")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ShopId");
 
@@ -612,26 +676,22 @@ namespace DataAccsessLayer.Migrations
                     b.HasOne("EntityLayer.Concrete.Dt_ApplicationUser", "ApplicationUser")
                         .WithMany("Appointments")
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EntityLayer.Concrete.Dt_Shop", "Shop")
                         .WithMany("Appointments")
                         .HasForeignKey("ShopId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EntityLayer.Concrete.Dt_TimeSlots", "TimeSlot")
                         .WithMany("Appointments")
                         .HasForeignKey("TimeSlotId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EntityLayer.Concrete.Dt_Worker", "Worker")
                         .WithMany("Appointments")
                         .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ApplicationUser");
 
@@ -689,7 +749,9 @@ namespace DataAccsessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.Dt_ApplicationUser", "ApplicationUser")
                         .WithMany("Notifications")
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
                 });
@@ -722,7 +784,9 @@ namespace DataAccsessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.Dt_ApplicationUser", "ApplicationUser")
                         .WithMany("Reviews")
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("EntityLayer.Concrete.Dt_Appointment", "Appointment")
                         .WithMany("Reviews")
@@ -768,11 +832,17 @@ namespace DataAccsessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Dt_Worker", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Dt_Shop", "Shop")
-                        .WithMany("Workers")
-                        .HasForeignKey("ShopId")
+                    b.HasOne("EntityLayer.Concrete.Dt_ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Dt_Shop", "Shop")
+                        .WithMany("Workers")
+                        .HasForeignKey("ShopId");
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Shop");
                 });

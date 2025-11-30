@@ -24,12 +24,12 @@ namespace AppointmentSystemAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result =await _appointmentService.GetList();
+            var result = await _appointmentService.GetList();
             return Ok(result);
         }
 
         [HttpGet("{Id}")]
-        public async Task<IActionResult> GetById(int id) 
+        public async Task<IActionResult> GetById(int id)
         {
             var appointment = _appointmentService.GetById(id);
             if (appointment == null)

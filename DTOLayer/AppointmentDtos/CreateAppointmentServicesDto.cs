@@ -10,6 +10,6 @@ namespace DTOLayer.AppointmentDtos
     {
         public int  AppointmentId { get; set; }
 
-        public int ServicesId { get; set; }
+        public int ServiceId { get; set; }
     }
 }

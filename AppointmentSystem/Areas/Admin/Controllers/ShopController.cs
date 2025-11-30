@@ -16,7 +16,7 @@ using Humanizer;
 namespace AppointmentSystem.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="SHOPOWNERS")]
+    [Authorize(Roles = "SHOPOWNERS")]
     public class ShopController : Controller
     {
         private readonly ApiClientService _apiClientService;
@@ -77,7 +77,7 @@ namespace AppointmentSystem.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        
+
         public async Task<IActionResult> ShopList()
         {
             var client = _apiClientService.CreateClient();
@@ -109,16 +109,21 @@ namespace AppointmentSystem.Areas.Admin.Controllers
             var content2 = new StringContent(JsonConvert.SerializeObject(queryObj2), Encoding.UTF8, "application/json");
             var response2 = await client.PostAsync("https://localhost:7179/api/Query/execute", content2);
             if (!response2.IsSuccessStatusCode)
-                return RedirectToAction("Index", "Dashboard");
+            {
+                var errorJson = await response2.Content.ReadAsStringAsync();
+                Console.WriteLine(errorJson);
+                return Redirect("~Admin/Dashboard/Index");
+            }
 
 
             var jsonData2 = await response2.Content.ReadAsStringAsync();
             var values2 = JsonConvert.DeserializeObject<List<AdminPanelShopListDto>>(jsonData2);
-            
+
+
 
             return View(values2);
 
-           
+
         }
     }
 }
